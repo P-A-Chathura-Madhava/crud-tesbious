@@ -23,7 +23,7 @@ const createUser = asyncHandler(async (req, res) => {
 
 // get all users
 const getAllUsers = asyncHandler(async(req, res)=>{
-  console.log("get all users");
+  // console.log("get all users");
   try {
     const allUsers = await User.find();
     res.json(allUsers);
