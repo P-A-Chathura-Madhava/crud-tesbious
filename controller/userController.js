@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import { json } from "express";
 
 // create a user
 const createUser = asyncHandler(async (req, res) => {
@@ -45,4 +46,27 @@ const getAUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { createUser, getAllUsers, getAUser };
+// update a user
+const updateAUser = asyncHandler(async (req, res) => {
+  // console.log("update a user");
+  const { _id } = req.params;
+  // console.log(_id);
+  // console.log(req?.body?.name);
+  // console.log(req?.body?.email);
+  // console.log(req?.body?.location);
+  try {
+    const updatedUser = await User.findByIdAndUpdate(_id, {
+      name: req?.body?.name,
+      email: req?.body?.email,
+      location: req?.body?.location
+    },
+    {
+      new: true
+    });
+    res.json(updatedUser);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export { createUser, getAllUsers, getAUser, updateAUser };
