@@ -21,4 +21,15 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { createUser };
+// get all users
+const getAllUsers = asyncHandler(async(req, res)=>{
+  console.log("get all users");
+  try {
+    const allUsers = await User.find();
+    res.json(allUsers);
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+export { createUser, getAllUsers };
